@@ -2,13 +2,6 @@
 pipeline {
     agent any
     
-  //options{
-     // buildDiscader(logRotator(numToKeepStr: '5'))
- // }
-     tools
-    {
-       maven "Maven"
-    } 
    environment {
     DOCKERHUB_CREDENTIALS=credentials('dockerhub')
   }
@@ -17,34 +10,27 @@ pipeline {
       stage('clone') {
            steps {
              
-                git branch: 'master', url: 'https://github.com/steevCpp/Tp-Devops.git'
+                git branch: 'master', url: 'https://github.com/steevCpp/Devops-Projet/'
              
           }
         }
  
-   stage('Génère war Maven') {
-           steps {
+   //stage('Génère war Maven') {
+    //      steps {
              
-                sh 'mvn package'             
-          }
-        }
+   //             sh 'mvn package'             
+  //        }
+   //     }
 
-   stage('Docker Build') {
+   stage('Docker Build compose') {
            steps {
               
 
-                sh 'docker build -t imagedevops:latest .' 
+                sh 'docker-compose build .' 
 
           }
         }
-        stage('Run Docker container on Jenkins') {
-             
-            steps {
-                
-                sh "docker run -d -p 8083:8080 --name contenairDevops imagedevops:latest"
- 
-            }
-        }
+
 
       stage('envoie sur dockerhub') {
              
