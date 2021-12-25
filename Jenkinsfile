@@ -3,7 +3,10 @@ pipeline {
     agent any
     
    environment {
-    DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+     imageName = 'steevdev7/my-private-ripo'
+
+    registryCredentialSet = 'dockerhub'
+
   }
 
  stages {
