@@ -22,17 +22,19 @@ pipeline {
   //        }
    //     }
 
+
    stage('Docker Build compose') {
            steps {
               
+                sh 'mkdir sessions data/mysq logs/mysql ' 
 
-                sh 'docker-compose build .' 
+                sh 'docker-compose build ' 
 
           }
         }
 
 
-      stage('envoie sur dockerhub') {
+      stage('envoie image  sur dockerhub') {
              
             steps {
                 sh "docker commit contenairDevops steevdev7/my-private-ripo"
